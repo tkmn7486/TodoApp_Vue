@@ -5,12 +5,13 @@
   </form>
 
   <!--以下のv-bindやidの概念について、しっかり理解したい-->
-
-  <div class="tasks" v-for="task in tasks" v-bind:key="task.id">
-    <input type="checkbox" id="checkbox">
-    <p class="taskNumber">{{task.id}}.</p>
-    <h3 class="taskTitle">{{task.content}}</h3>
-  </div>
+  <ul>
+    <li class="tasks" v-for="task in tasks" v-bind:key="task.id">
+      <input type="checkbox" id="checkbox">
+      <p class="taskNumber">{{task.id}}.</p>
+      <h3 class="taskTitle">{{task.content}}</h3>
+    </li>
+  </ul>
   <delete class="deleteButton" @click="deleteTask">
     <button>完了したタスクを除去</button>
   </delete>

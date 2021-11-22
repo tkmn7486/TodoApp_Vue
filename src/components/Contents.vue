@@ -30,6 +30,7 @@ export default {
     const newTodo = ref('');
     const tasks = ref([]);
     let count = 1;
+    let STORAGE_KEY = 'todos-vuejs-demo'
 
     function addNewTodo(){
       tasks.value.push({
@@ -38,6 +39,7 @@ export default {
         content: newTodo.value,
       });
       newTodo.value="";
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
       countAdding();
     }
 

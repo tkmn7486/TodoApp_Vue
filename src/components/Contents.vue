@@ -37,6 +37,7 @@ export default {
         done: false,
         content: newTodo.value,
       });
+      newTodo.value="";
       countAdding();
     }
 
@@ -48,7 +49,7 @@ export default {
     function deleteTask(){
       if(confirm("全タスクを削除します。よろしいですか？")){
         console.log("タスクを全て削除します。")
-        
+        this.tasks.splice(0, this.tasks.length);
         return;
       }
     }

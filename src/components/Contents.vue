@@ -3,10 +3,11 @@
     <input class="inputForm" v-model="newTodo" name="new_todo">
     <button class="addButton">追加</button>
   </form>
+  <p class="a">{{ fetched_tasks }}</p>
 
   <!--以下のv-bindやidの概念について、しっかり理解したい-->
   <ul>
-    <li class="tasks" v-for="task in tasks" v-bind:key="task.id">
+    <li class="tasks" v-for="task in fetched_tasks" v-bind:key="task.id">
       <input type="checkbox" id="checkbox">
       <p class="taskNumber">{{task.id}}.</p>
       <h3 class="taskTitle">{{task.content}}</h3>
@@ -19,6 +20,7 @@
 
 <script>
 import { ref } from 'vue';
+// import { reactive } from "@vue/composition-api";
 
 export default {
   name: 'Form',
@@ -27,10 +29,20 @@ export default {
   },
 
   setup(){
+    // const state = reactive({
+    //   fetched_tasks:[]
+    // })
+    // return {
+    //   state,
+    // };
     const newTodo = ref('');
-    const tasks = ref([]);
+    let tasks = ref([]);
     let count = 1;
-    let STORAGE_KEY = 'todos-vuejs-demo'
+    let STORAGE_KEY = 'todos-vuejs-demo';
+
+    let fetched_tasks = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+    console.log("テスト");
+    console.log(fetched_tasks);
 
     function addNewTodo(){
       tasks.value.push({
@@ -57,7 +69,7 @@ export default {
     }
     return{
       newTodo,
-      tasks,
+      fetched_tasks,
       addNewTodo,
       countAdding,
       deleteTask,
@@ -67,6 +79,9 @@ export default {
 </script>
 
 <style>
+.a{
+  color:white;
+}
 .tasks{
   padding-left:30px;
 }
